@@ -33,8 +33,8 @@ class ConvNetImageDataset(object):
 
 
 	# Constructor. Arguments:
-	# - path_to_train_dir: path to the directory containing the 3D images used
-	#   for training the network;
+	# - path_to_train_directory: path to the directory containing the 3D images
+	#   used for training the network;
 	# - batch_size: number of images a training batch is made of;
 	# - image_size: size of the 3D images, which are image_size x image_size x
 	#   n_channels;
@@ -47,8 +47,8 @@ class ConvNetImageDataset(object):
 		self.image_size = image_size
 		self.n_channels = n_channels
 		self.lastTestImage = 0
-		self.target_file = None
 		# Find .csv file with targets
+		self.target_file = None
 		for dirName, subdirList, fileList in os.walk(self.trainDirectory):
 			for filename in fileList:
 				if ".csv" in filename.lower():
@@ -329,6 +329,7 @@ class ConvNetImageDataset(object):
 		self.lastBatchImage = 0
 		self.dump_training_test_set_list()
 		self.dump_last_batch_image()
+		return
 
 
 	# Dump information about training and test set on .csv files, in order to
