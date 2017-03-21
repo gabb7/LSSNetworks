@@ -140,7 +140,7 @@ class ConvNet(object):
 	# - x: layer input;
 	# - W: layer weights;
 	# - b: layer biases;
-	# - strides: stride of the sliding window for each dimension of the input x.
+	# - strides: stride of the sliding window of the input x.
 	def conv2d(self, x, W, b, strides=1):
 		conv = tf.nn.conv2d(x, W, strides=[1, strides, strides, 1],\
 				padding='SAME')
@@ -150,7 +150,7 @@ class ConvNet(object):
 
 	# Wrapper to 2D Max-Pooling operation. Arguments:
 	# - x: layer input;
-	# - strides: stride of the sliding window for each dimension of the input x.
+	# - k: stride of the sliding window of the input x.
 	def maxpool2d(self, x, k=2):
 		return tf.nn.max_pool(x, ksize=[1, k, k, 1], strides=[1, k, k, 1],
 						  padding='SAME')
@@ -160,7 +160,7 @@ class ConvNet(object):
 	# - x: network input;
 	# - weights: network weights;
 	# - biases: network biases;
-	# - dropout: probability to keep a connection in dropout stage.
+	# - dropout: probability to keep a connection at dropout stage.
 	def inference(self, x, weights, biases, dropout):
 		# Reshape input picture for computation purposes
 		x = tf.reshape(x, shape=[-1, self.image_size, self.image_size, \
@@ -311,7 +311,7 @@ class ConvNet(object):
 
 
 	# Main function for training the convolutional neural network. Arguments:
-	# - training_iters: number of data points that are fed to the networks
+	# - training_iters: number of data points that are fed to the network
 	#   during training;
 	# - display_step: number of step between printings of cost function and
 	#   accuracy on stdout;
@@ -428,7 +428,7 @@ class ConvNet(object):
 		with tf.Session() as sess:
 			# TensorFlow initialization
 			sess.run(self.init)
-			# Restore the networks
+			# Restore the network
 			self.system_saver.restore(sess, restoreFile)
 			# Read lists describing test and training set
 			self.DataSet.read_training_test_set_list()
